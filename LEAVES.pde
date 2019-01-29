@@ -1,15 +1,22 @@
 /*
- * Requires the P5 libraries:
+---------------------------------------------------------------
+LEAVES MOVING ON THE FLOOR
+Kinect + P5 App
+---------------------------------------------------------------
+
+Requires the P5 libraries:
 
 -- Open Kinect for Processing
 -- Blob Detection
 -- punktiert https://github.com/djrkohler/punktiert
 
+---------------------------------------------------------------
+
 -- Install OpenKinect on windows:
 https://github.com/OpenKinect/libfreenect2/blob/master/README.md#windows--visual-studio
 
+---------------------------------------------------------------
 Inspired from https://github.com/Bilue/BilueKinectInteraction
-http://www.phillfarrugia.com/2016/02/16/5th-anniversary-party/
 
  */
 import org.openkinect.processing.*;
@@ -73,6 +80,7 @@ public void setup() {
   // size(1920,1080);
   fullScreen(P3D);
   noCursor();
+  frameRate(25);
 
   // INITIALISE KINECT
   // kinect V1
