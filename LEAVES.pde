@@ -1,11 +1,16 @@
 /*
  * Requires the P5 libraries:
- *   * Open Kinect for Processing
- *   * Blob Detection
- *   * punktiert https://github.com/djrkohler/punktiert
 
- *   * Inspired from https://github.com/Bilue/BilueKinectInteraction
- *   * http://www.phillfarrugia.com/2016/02/16/5th-anniversary-party/
+-- Open Kinect for Processing
+-- Blob Detection
+-- punktiert https://github.com/djrkohler/punktiert
+
+-- Install OpenKinect on windows:
+https://github.com/OpenKinect/libfreenect2/blob/master/README.md#windows--visual-studio
+
+Inspired from https://github.com/Bilue/BilueKinectInteraction
+http://www.phillfarrugia.com/2016/02/16/5th-anniversary-party/
+
  */
 import org.openkinect.processing.*;
 import blobDetection.*;
