@@ -61,8 +61,6 @@ int     homeMass              = 100;        // home Mass      100
 
 float   homeSpringStrength    = 0.0001f;    // the force drawing the particles back to their home position
 
-color   movingColor           = color(0xFF, 0xFF, 0xFF);
-
 int     imgZoomOut = 8;
 
 
@@ -189,8 +187,8 @@ public void draw() {
     // DETECT BLOBS
     Detector detector = new Detector((int)(filteredImage.width * blobDetectionScale), (int)(filteredImage.height * blobDetectionScale), maxVerticesPerBlob);
     detector.detectBlobs(filteredImage);
-    if (detector.blobs.size() > 0) { lastUserInteraction = System.currentTimeMillis(); }
-    if (configMode) { detector.drawBlobs(movingColor); }
+    // if (detector.blobs.size() > 0) { lastUserInteraction = System.currentTimeMillis(); }
+    if (configMode) { detector.drawBlobs(); }
     // INJECT BLOBS
     injectAttractions(detector.makePunktiertAttractions());
   }

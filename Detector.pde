@@ -50,11 +50,11 @@ class Detector {
   /**
    * Draw the current set of blobs
    */
-  public void drawBlobs(color c) {
+  public void drawBlobs() {
     noFill();
+    stroke(255);
     for (Blob b : blobs) {
         strokeWeight(1);
-        stroke(c);
         for (int i = 0; i < b.getEdgeNb(); i++) {
           EdgeVertex eA = b.getEdgeVertexA(i);
           EdgeVertex eB = b.getEdgeVertexB(i);
@@ -67,6 +67,7 @@ class Detector {
         }
     }
     rect(xMin, yMin, xMax-xMin, yMax-yMin);
+
   }
 
   /**
