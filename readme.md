@@ -1,5 +1,5 @@
-##LEAVES MOVING ON THE FLOOR
-Processing App using Kinect (v1 or v2)
+## LEAVES MOVING ON THE FLOOR
+#### Processing App using Kinect (v1 or v2)
 
 [Project on Github](https://github.com/Hemisphere-Project/Leaves)
 
@@ -13,7 +13,7 @@ Requires the P5 libraries:
 
 ---------------------------------------------------------------
 
-##Windows
+## Windows
 Install OpenKinect on windows:
 https://github.com/OpenKinect/libfreenect/#windows
 
