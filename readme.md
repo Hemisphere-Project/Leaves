@@ -10,6 +10,8 @@ Requires the P5 libraries:
 - [BlobDetection](http://www.v3ga.net/processing/BlobDetection/)
 - [punktiert](https://github.com/djrkohler/punktiert)
 
+### Notes
+When exporting an app with java embedded, duplicate the 'img' folder inside the 'application.windows64' folder.
 
 ## KINECT 1 Windows
 Install OpenKinect on windows:

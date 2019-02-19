@@ -23,7 +23,7 @@ PImage      img10;
 PImage mask;
 
 int     numParticles          = 2000;
-boolean configMode            = true;
+boolean configMode            = false;
 long    lastUserInteraction   = 0;
 boolean kinectConnected       = false;
 int     maxVerticesPerBlob    = 50;
