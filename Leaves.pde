@@ -33,10 +33,10 @@ float   blobDetectionScale    = 0.3;      //  SCALE BLOB DETECTION (init 0.5)
 // KINECT CONFIG
 int     depthThresholdMin     = 200;     // NEAREST 200
 int     depthThresholdMax     = 600;     // FAREST 600
-int     xMin                  = 0;       //
-int     xMax                  = 1920;    //
-int     yMin                  = 0;       //
-int     yMax                  = 1080;    //
+int     xMin                  = 10;       //
+int     yMin                  = 20;       //
+int     xMax                  = 1820;    //
+int     yMax                  = 1050;    //
 
 // MECANICS
 float   friction              = 0.1;        // how much friction each particle has
@@ -231,7 +231,7 @@ public void draw() {
     text( "xMin - yMin // w // ←↑↓→",20,120);
     text(xMin+" - "+yMin,20,140);
     text("xMax - yMax // x // ←↑↓→",20,160);
-    text(xMax+" - "+xMax,20,180);
+    text(xMax+" - "+yMax,20,180);
 
     text("DEPTH THRESHOLDS MIN & MAX",20,220);
     text( "Distance Min // q // ↑↓",20,240);
