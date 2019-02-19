@@ -6,7 +6,7 @@
 
 Requires the P5 libraries:
 
-- [Open Kinect for Processing](http://shiffman.net/p5/kinect/)
+- [Open Kinect for Processing](https://github.com/shiffman/OpenKinect-for-Processing)
 - [BlobDetection](http://www.v3ga.net/processing/BlobDetection/)
 - [punktiert](https://github.com/djrkohler/punktiert)
 
