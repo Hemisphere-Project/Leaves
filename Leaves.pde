@@ -2,6 +2,7 @@ import org.openkinect.processing.*;
 import blobDetection.*;
 import punktiert.math.*;
 import punktiert.physics.*;
+import processing.sound.*;
 
 // Kinect       kinect;
 Kinect2      kinect2;
@@ -21,9 +22,11 @@ PImage      img9;
 PImage      img10;
 
 PImage mask;
+SoundFile soundfile;
 
 int     numParticles          = 2000;
 boolean configMode            = false;
+boolean drawFilteredImage     = false;
 long    lastUserInteraction   = 0;
 boolean kinectConnected       = false;
 int     maxVerticesPerBlob    = 50;
@@ -33,10 +36,13 @@ float   blobDetectionScale    = 0.3;      //  SCALE BLOB DETECTION (init 0.5)
 // KINECT CONFIG
 int     depthThresholdMin     = 200;     // NEAREST 200
 int     depthThresholdMax     = 600;     // FAREST 600
-int     xMin                  = 10;       //
-int     yMin                  = 20;       //
-int     xMax                  = 1820;    //
-int     yMax                  = 1050;    //
+boolean flipImage             = true;       // Flip image de caméra (pour éviter d'avoir à inverser la vidéoprojection)
+// KINECT MAPPING
+int     xMin                  = 10;
+int     yMin                  = 20;
+int     xMax                  = 1820;
+int     yMax                  = 1050;
+
 
 // MECANICS
 float   friction              = 0.1;        // how much friction each particle has
@@ -74,16 +80,16 @@ public void setup() {
 
   setupPhysics();
 
-  img1 = loadImage("img/a1.png");
-  img2 = loadImage("img/a2.png");
-  img3 = loadImage("img/a3.png");
-  img4 = loadImage("img/a4.png");
-  img5 = loadImage("img/a5.png");
-  img6 = loadImage("img/a6.png");
-  img7 = loadImage("img/a7.png");
-  img8 = loadImage("img/a8.png");
-  img9 = loadImage("img/a9.png");
-  img10 = loadImage("img/a10.png");
+  img1 = loadImage("files/a1.png");
+  img2 = loadImage("files/a2.png");
+  img3 = loadImage("files/a3.png");
+  img4 = loadImage("files/a4.png");
+  img5 = loadImage("files/a5.png");
+  img6 = loadImage("files/a6.png");
+  img7 = loadImage("files/a7.png");
+  img8 = loadImage("files/a8.png");
+  img9 = loadImage("files/a9.png");
+  img10 = loadImage("files/a10.png");
   img1.resize(img1.width/imgZoomOut, img1.height/imgZoomOut);
   img2.resize(img2.width/imgZoomOut, img2.height/imgZoomOut);
   img3.resize(img3.width/imgZoomOut, img3.height/imgZoomOut);
@@ -95,8 +101,13 @@ public void setup() {
   img9.resize(img9.width/imgZoomOut, img9.height/imgZoomOut);
   img10.resize(img10.width/imgZoomOut, img10.height/imgZoomOut);
 
-  mask = loadImage("img/mask.png");
+  // MASK
+  mask = loadImage("files/mask.png");
   mask.resize(width,height);
+
+  // SOUND
+  soundfile = new SoundFile(this, "files/sound.aif");
+  soundfile.loop();
 
 }
 
@@ -165,7 +176,7 @@ public void draw() {
 
   if (kinectConnected) {
     // THRESHOLD IMG
-    DepthFilter depthFilter = new DepthFilter(depthThresholdMin, depthThresholdMax);
+    DepthFilter depthFilter = new DepthFilter(depthThresholdMin, depthThresholdMax, flipImage);
     // RAWDEPTH
     // kinect V1
     // PImage filteredImage = depthFilter.filteredImage(kinect.getRawDepth(), 640, 480);
@@ -175,7 +186,13 @@ public void draw() {
     Detector detector = new Detector((int)(filteredImage.width * blobDetectionScale), (int)(filteredImage.height * blobDetectionScale), maxVerticesPerBlob);
     detector.detectBlobs(filteredImage);
     // if (detector.blobs.size() > 0) { lastUserInteraction = System.currentTimeMillis(); }
-    if (configMode) { detector.drawBlobs(); }
+    if (configMode) {
+      detector.drawBlobs();
+      if(drawFilteredImage){
+        image(filteredImage,xMin, yMin, xMax-xMin, yMax-yMin);
+      }
+
+    }
     // INJECT BLOBS
     injectAttractions(detector.makePunktiertAttractions());
   }
@@ -238,6 +255,10 @@ public void draw() {
     text(depthThresholdMin,20,260);
     text( "Distance Max // s // ↑↓ ",20,280);
     text(depthThresholdMax,20,300);
+
+
+    text("Draw Filtered Img // v // "+drawFilteredImage,20,340);
+
 
   }
 
@@ -308,6 +329,10 @@ public void keyPressed() {
       else if (keyCode == DOWN) { yMax +=10; }
       else if (keyCode == LEFT) { xMax -=10; }
       else if (keyCode == RIGHT){ xMax +=10; }
+    }
+    // Draw filtered image
+    if (key == 'v') {
+      drawFilteredImage = !drawFilteredImage;
     }
   }
 

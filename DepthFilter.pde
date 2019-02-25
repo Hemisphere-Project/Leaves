@@ -7,10 +7,12 @@ public class DepthFilter {
   /** Anything further away from this will be black, closer will be white */
   private int thresholdMin;
   private int thresholdMax;
+  private boolean flipImage;
 
-  public DepthFilter(int tMin, int tMax) {
+  public DepthFilter(int tMin, int tMax, boolean flip) {
     thresholdMin = tMin;
     thresholdMax = tMax;
+    flipImage = flip;
   }
 
   /**
@@ -20,11 +22,17 @@ public class DepthFilter {
   public PImage filteredImage(int[] rawDepths, int rawWidth, int rawHeight) {
     PImage output = createImage(rawWidth, rawHeight, RGB);
 
+
     for (int x = 0; x < rawWidth; x++) {
       for (int y = 0; y < rawHeight; y++) {
-        int offset = x + y*rawWidth;
-        int rawDepth = rawDepths[offset];
-
+        // Get rawDepth
+        int offsetIn = x + y*rawWidth;
+        int rawDepth = rawDepths[offsetIn];
+        // New Offset if image flipped vertically
+        int offset = 0;
+        if(flipImage==false){offset = x + y*rawWidth;}
+        if(flipImage==true){offset = y*rawWidth + rawWidth - x - 1;}
+        // Set Pixel
         if (rawDepth > thresholdMin && rawDepth < thresholdMax) {
           output.pixels[offset] = color(255, 255, 255); // set to white
         } else {
