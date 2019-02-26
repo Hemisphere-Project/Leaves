@@ -106,7 +106,7 @@ public void setup() {
   mask.resize(width,height);
 
   // SOUND
-  soundfile = new SoundFile(this, "files/sound.aif");
+  soundfile = new SoundFile(this, "files/son_amandier.wav");
   soundfile.loop();
 
 }
