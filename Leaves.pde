@@ -35,7 +35,7 @@ float   blobDetectionScale    = 0.3;      //  SCALE BLOB DETECTION (init 0.5)
 
 // KINECT CONFIG
 int     depthThresholdMin     = 200;     // NEAREST 200
-int     depthThresholdMax     = 600;     // FAREST 600
+int     depthThresholdMax     = 2500;     // FAREST 600
 boolean flipImage             = true;       // Flip image de caméra (pour éviter d'avoir à inverser la vidéoprojection)
 // KINECT MAPPING
 int     xMin                  = 10;
