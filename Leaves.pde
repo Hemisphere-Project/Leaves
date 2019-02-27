@@ -40,8 +40,8 @@ boolean flipImage             = true;       // Flip image de caméra (pour évit
 // KINECT MAPPING
 int     xMin                  = 170;
 int     yMin                  = 70;
-int     xMax                  = 1590;
-int     yMax                  = 1100;
+int     xMax                  = 1580;
+int     yMax                  = 1060;
 
 
 // MECANICS
