@@ -24,7 +24,7 @@ PImage      img10;
 PImage mask;
 SoundFile soundfile;
 
-int     numParticles          = 2000;
+int     numParticles          = 2500;
 boolean configMode            = false;
 boolean drawFilteredImage     = false;
 long    lastUserInteraction   = 0;
@@ -139,15 +139,39 @@ private void setupPhysics() {
       // float py = height + sin(randomAngle)* randomRadiusY ;
       // 1/4 ELLIPSE REPARTITION (BIGGER)
       /////////////////////////////////
-      float randomAngle = random((3*PI/2)+0.3, 2*PI-0.3);
-      float randomRadiusX = pow(random(25, width-200),1.01);
-      float randomRadiusY = pow(random(25, height-200),1.01);
-      if( randomAngle>(PI/8+3*PI/2) && randomAngle<(2*PI-PI/8) ){
-        randomRadiusX = pow(random(25, width+200),1.01);
-        randomRadiusY = pow(random(25, height+200),1.01);
+      // float randomAngle = random((3*PI/2)+0.3, 2*PI-0.3);
+      // float randomRadiusX = pow(random(25, width-200),1.01);
+      // float randomRadiusY = pow(random(25, height-200),1.01);
+      // if( randomAngle>(PI/8+3*PI/2) && randomAngle<(2*PI-PI/8) ){
+      //   randomRadiusX = pow(random(25, width+200),1.01);
+      //   randomRadiusY = pow(random(25, height+200),1.01);
+      // }
+      // float px = 0 + cos(randomAngle)* randomRadiusX ;
+      // float py = height - 20 + sin(randomAngle)* randomRadiusY ;
+      // MULTI REPARTITION
+      /////////////////////////////////
+      float px = 0;
+      float py = 0;
+      if(x<(numParticles/2)){
+        // 1/4 ELLIPSE REPARTITION
+        float randomAngle = random(3*PI/2, 2*PI);
+        float randomRadiusX = random(0, width);
+        float randomRadiusY = random(0, height);
+        px = 0 + cos(randomAngle)* randomRadiusX ;
+        py = height + sin(randomAngle)* randomRadiusY ;
+        px = map(px, 0, width, 50, width-50);
+        py = map(py, 0, height, 50, height-100);
       }
-      float px = 0 + cos(randomAngle)* randomRadiusX ;
-      float py = height - 20 + sin(randomAngle)* randomRadiusY ;
+      if(x>=(numParticles/2)){
+        // Square minus border
+        px = random(50, width-100);
+        py = random(50, height-100);
+        float angle = atan((height-py)/(px-0.5*width));
+        if((angle>0.6)&&(angle<1.3)&&(sqrt(pow(px-0.5*width,2)+pow(height-py,2))>1100 )){
+          px = random(50, width/2);
+          py = random(height/2, height-100);
+        }
+      }
       /////////////////////////////////
       //HOME
       Vec homePos    = new Vec(int(px), int(py));
