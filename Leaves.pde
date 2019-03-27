@@ -39,9 +39,9 @@ int     depthThresholdMax     = 2190;     // FAREST
 boolean flipImage             = true;     // Flip image de caméra
 // KINECT MAPPING
 int     xMin                  = 50;
-int     yMin                  = -140;
-int     xMax                  = 1550;
-int     yMax                  = 870;
+int     yMin                  = -150;
+int     xMax                  = 1570;
+int     yMax                  = 1070;
 
 
 // MECANICS
